@@ -1,0 +1,353 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CoffeeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Categories">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoriesName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Coffee">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="CoffeeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductID" Type="int" Nullable="false" />
+          <Property Name="CoffeeName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CountryID" Type="int" Nullable="false" />
+          <Property Name="RoastingID" Type="int" Nullable="false" />
+          <Property Name="ProcessID" Type="int" Nullable="false" />
+          <Property Name="PackageID" Type="int" Nullable="false" />
+          <Property Name="ConstellationID" Type="int" />
+          <Property Name="RainForest" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PhotoDetails">
+          <Key>
+            <PropertyRef Name="PhotoDetailsID" />
+          </Key>
+          <Property Name="PhotoDetailsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductID" Type="int" Nullable="false" />
+          <Property Name="PhotoID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Photos">
+          <Key>
+            <PropertyRef Name="PhotoID" />
+          </Key>
+          <Property Name="PhotoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Photo" Type="image" />
+        </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="ProductID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CategoryID" Type="int" Nullable="false" />
+          <Property Name="CountryID" Type="int" />
+          <Property Name="Price" Type="float" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" />
+          <Property Name="Stock" Type="int" />
+          <Property Name="ClickCount" Type="int" />
+          <Property Name="TakeDown" Type="bit" Nullable="false" />
+          <Property Name="Star" Type="float" />
+          <Property Name="PhotoID" Type="int" />
+        </EntityType>
+        <Association Name="FK_Coffee_Products1">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="Coffee" Type="Self.Coffee" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="Coffee">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhotoDetails_Photos">
+          <End Role="Photos" Type="Self.Photos" Multiplicity="1" />
+          <End Role="PhotoDetails" Type="Self.PhotoDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Photos">
+              <PropertyRef Name="PhotoID" />
+            </Principal>
+            <Dependent Role="PhotoDetails">
+              <PropertyRef Name="PhotoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhotoDetails_Products">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="PhotoDetails" Type="Self.PhotoDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="PhotoDetails">
+              <PropertyRef Name="PhotoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_Categories">
+          <End Role="Categories" Type="Self.Categories" Multiplicity="1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CoffeeModelStoreContainer">
+          <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Coffee" EntityType="Self.Coffee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PhotoDetails" EntityType="Self.PhotoDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Photos" EntityType="Self.Photos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Coffee_Products1" Association="Self.FK_Coffee_Products1">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Coffee" EntitySet="Coffee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhotoDetails_Photos" Association="Self.FK_PhotoDetails_Photos">
+            <End Role="Photos" EntitySet="Photos" />
+            <End Role="PhotoDetails" EntitySet="PhotoDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhotoDetails_Products" Association="Self.FK_PhotoDetails_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="PhotoDetails" EntitySet="PhotoDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_Categories" Association="Self.FK_Products_Categories">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CoffeeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Categories">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoriesName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_Products_Categories" FromRole="Categories" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="Coffee">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="CoffeeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <Property Name="CoffeeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CountryID" Type="Int32" Nullable="false" />
+          <Property Name="RoastingID" Type="Int32" Nullable="false" />
+          <Property Name="ProcessID" Type="Int32" Nullable="false" />
+          <Property Name="PackageID" Type="Int32" Nullable="false" />
+          <Property Name="ConstellationID" Type="Int32" />
+          <Property Name="RainForest" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_Coffee_Products1" FromRole="Coffee" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="PhotoDetails">
+          <Key>
+            <PropertyRef Name="PhotoDetailsID" />
+          </Key>
+          <Property Name="PhotoDetailsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <Property Name="PhotoID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Photos" Relationship="Self.FK_PhotoDetails_Photos" FromRole="PhotoDetails" ToRole="Photos" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_PhotoDetails_Products" FromRole="PhotoDetails" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="Photos">
+          <Key>
+            <PropertyRef Name="PhotoID" />
+          </Key>
+          <Property Name="PhotoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="PhotoDetails" Relationship="Self.FK_PhotoDetails_Photos" FromRole="Photos" ToRole="PhotoDetails" />
+        </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="ProductID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CategoryID" Type="Int32" Nullable="false" />
+          <Property Name="CountryID" Type="Int32" />
+          <Property Name="Price" Type="Double" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Stock" Type="Int32" />
+          <Property Name="ClickCount" Type="Int32" />
+          <Property Name="TakeDown" Type="Boolean" Nullable="false" />
+          <Property Name="Star" Type="Double" />
+          <Property Name="PhotoID" Type="Int32" />
+          <NavigationProperty Name="Categories" Relationship="Self.FK_Products_Categories" FromRole="Products" ToRole="Categories" />
+          <NavigationProperty Name="Coffee" Relationship="Self.FK_Coffee_Products1" FromRole="Products" ToRole="Coffee" />
+          <NavigationProperty Name="PhotoDetails" Relationship="Self.FK_PhotoDetails_Products" FromRole="Products" ToRole="PhotoDetails" />
+        </EntityType>
+        <Association Name="FK_Products_Categories">
+          <End Role="Categories" Type="Self.Categories" Multiplicity="1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Coffee_Products1">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="Coffee" Type="Self.Coffee" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="Coffee">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhotoDetails_Photos">
+          <End Role="Photos" Type="Self.Photos" Multiplicity="1" />
+          <End Role="PhotoDetails" Type="Self.PhotoDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Photos">
+              <PropertyRef Name="PhotoID" />
+            </Principal>
+            <Dependent Role="PhotoDetails">
+              <PropertyRef Name="PhotoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhotoDetails_Products">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="PhotoDetails" Type="Self.PhotoDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="PhotoDetails">
+              <PropertyRef Name="PhotoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CoffeeEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Categories" EntityType="Self.Categories" />
+          <EntitySet Name="Coffee" EntityType="Self.Coffee" />
+          <EntitySet Name="PhotoDetails" EntityType="Self.PhotoDetails" />
+          <EntitySet Name="Photos" EntityType="Self.Photos" />
+          <EntitySet Name="Products" EntityType="Self.Products" />
+          <AssociationSet Name="FK_Products_Categories" Association="Self.FK_Products_Categories">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Coffee_Products1" Association="Self.FK_Coffee_Products1">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Coffee" EntitySet="Coffee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhotoDetails_Photos" Association="Self.FK_PhotoDetails_Photos">
+            <End Role="Photos" EntitySet="Photos" />
+            <End Role="PhotoDetails" EntitySet="PhotoDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhotoDetails_Products" Association="Self.FK_PhotoDetails_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="PhotoDetails" EntitySet="PhotoDetails" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CoffeeModelStoreContainer" CdmEntityContainer="CoffeeEntities1">
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="CoffeeModel.Categories">
+              <MappingFragment StoreEntitySet="Categories">
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="CategoriesName" ColumnName="CategoriesName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Coffee">
+            <EntityTypeMapping TypeName="CoffeeModel.Coffee">
+              <MappingFragment StoreEntitySet="Coffee">
+                <ScalarProperty Name="CoffeeID" ColumnName="CoffeeID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="CoffeeName" ColumnName="CoffeeName" />
+                <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+                <ScalarProperty Name="RoastingID" ColumnName="RoastingID" />
+                <ScalarProperty Name="ProcessID" ColumnName="ProcessID" />
+                <ScalarProperty Name="PackageID" ColumnName="PackageID" />
+                <ScalarProperty Name="ConstellationID" ColumnName="ConstellationID" />
+                <ScalarProperty Name="RainForest" ColumnName="RainForest" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PhotoDetails">
+            <EntityTypeMapping TypeName="CoffeeModel.PhotoDetails">
+              <MappingFragment StoreEntitySet="PhotoDetails">
+                <ScalarProperty Name="PhotoDetailsID" ColumnName="PhotoDetailsID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="PhotoID" ColumnName="PhotoID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Photos">
+            <EntityTypeMapping TypeName="CoffeeModel.Photos">
+              <MappingFragment StoreEntitySet="Photos">
+                <ScalarProperty Name="PhotoID" ColumnName="PhotoID" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="CoffeeModel.Products">
+              <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Stock" ColumnName="Stock" />
+                <ScalarProperty Name="ClickCount" ColumnName="ClickCount" />
+                <ScalarProperty Name="TakeDown" ColumnName="TakeDown" />
+                <ScalarProperty Name="Star" ColumnName="Star" />
+                <ScalarProperty Name="PhotoID" ColumnName="PhotoID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="無" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
