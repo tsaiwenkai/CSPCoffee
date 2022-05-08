@@ -17,7 +17,7 @@ namespace CSPCoffee
         {
             InitializeComponent();
             x = db.Products.AsEnumerable().ToArray();
-            label1.Text = x.ProductName.ToString();
+
 
         }
     }

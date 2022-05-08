@@ -22,8 +22,11 @@ namespace CSPCoffee
         {
             InitializeComponent();
             MyInitializer();
+            dataGridView1.DataSource = db.PhotoDetails.AsEnumerable().Select(p => new {  p.ProductID, p.Photos.Photo }).ToList();
         }
-
+        int coffee = 1;
+        int boiler = 2;
+        int spend = 3;
         CoffeeEntities1 db = new CoffeeEntities1();
         internal void MyInitializer()
         {
@@ -56,16 +59,39 @@ namespace CSPCoffee
         
         private void button1_Click_1(object sender, EventArgs e)
         {
-
-            var q = db.Products.ToArray();
+            var q = db.Products.Where(p=>p.CategoryID==coffee).ToArray();
             for (int i = 0; i < q.Length; i++)
             {
-                PDcontrol con = new PDcontrol(i);
+                PDcontrol con = new PDcontrol(coffee, i);
                 con.Left += 10;
                 con.Cursor= System.Windows.Forms.Cursors.Hand;
                 flowLayoutPanel1.Controls.Add(con);
             }
 
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            var q = db.Products.Where(p => p.CategoryID == boiler).ToArray();
+            for (int i = 0; i < q.Length; i++)
+            {
+                PDcontrol con = new PDcontrol(boiler, i);
+                con.Left += 10;
+                con.Cursor = System.Windows.Forms.Cursors.Hand;
+                flowLayoutPanel1.Controls.Add(con);
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            var q = db.Products.Where(p => p.CategoryID == spend).ToArray();
+            for (int i = 0; i < q.Length; i++)
+            {
+                PDcontrol con = new PDcontrol(spend, i);
+                con.Left += 10;
+                con.Cursor = System.Windows.Forms.Cursors.Hand;
+                flowLayoutPanel1.Controls.Add(con);
+            }
         }
     }
 }
