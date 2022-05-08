@@ -15,7 +15,7 @@ namespace CSPCoffee
     {
         CoffeeEntities1 db = new CoffeeEntities1();
 
-        public PDcontrol(int group,int count)
+        public  PDcontrol(int group,int count)
         {
             
             InitializeComponent();
@@ -41,7 +41,6 @@ namespace CSPCoffee
             pictureBox1.Image = Image.FromStream(ms);
             pictureBox1.Click += PDcontrol_Click;
         }
-
         private void PDcontrol_Click(object sender, EventArgs e)
         {
             Productdetail pd = new Productdetail(sender);
