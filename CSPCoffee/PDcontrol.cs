@@ -47,7 +47,7 @@ namespace CSPCoffee
             PDcontrol product = (PDcontrol)sender;
 
             Productdetail pd = new Productdetail(product.PDid);
-            pd.Location = new Point(300, 300);
+
             pd.Show();
 
 

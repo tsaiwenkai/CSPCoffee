@@ -49,6 +49,7 @@ namespace CSPCoffee
             this.label14 = new System.Windows.Forms.Label();
             this.lbpack = new System.Windows.Forms.Label();
             this.lbstock = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -251,12 +252,24 @@ namespace CSPCoffee
             this.lbstock.TabIndex = 20;
             this.lbstock.Text = "label16";
             // 
+            // button2
+            // 
+            this.button2.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button2.Location = new System.Drawing.Point(485, 374);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(120, 41);
+            this.button2.TabIndex = 21;
+            this.button2.Text = "加入購物車(1)";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // Productdetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.ClientSize = new System.Drawing.Size(845, 510);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.lbstock);
             this.Controls.Add(this.lbpack);
             this.Controls.Add(this.label14);
@@ -308,5 +321,6 @@ namespace CSPCoffee
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label lbpack;
         private System.Windows.Forms.Label lbstock;
+        private System.Windows.Forms.Button button2;
     }
 }

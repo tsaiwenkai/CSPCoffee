@@ -14,8 +14,10 @@ namespace CSPCoffee
     public partial class Productdetail : Form
     {
         CoffeeEntities1 db = new CoffeeEntities1();
+        int pdID;
         public Productdetail(int productID)
         {
+             pdID = productID;
             InitializeComponent();
             var name = db.Products.AsEnumerable().
                 Where(p => p.ProductID == productID).
@@ -85,19 +87,28 @@ namespace CSPCoffee
                 }                   
             }
         }
-        int MemberID = 0;
+        int memberID = 0;
         private void button1_Click(object sender, EventArgs e)
         {
-            if (MemberID == 0)
+            //Productdetail pdd = (Productdetail)sender;
+
+            if (memberID == 0)
             {
                 MessageBox.Show("請登入會員");
             }
             else
             {
+                //db.ShoppingCarDetail.Add(new ShoppingCarDetail { MemberID = memberID, ProductsID = pdID, Quantity = comboBox1.SelectedIndex + 1 });
 
+                var q = new ShoppingCarDetail { MemberID = memberID, ProductsID = pdID, Quantity = comboBox1.SelectedIndex + 1 };
+                db.ShoppingCarDetail.Add(q);
+                db.SaveChanges();
             }
+        }
 
-
+        private void button2_Click(object sender, EventArgs e)
+        {
+            memberID = 1;
         }
     }
 }
