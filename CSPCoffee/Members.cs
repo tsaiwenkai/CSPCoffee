@@ -12,42 +12,39 @@ namespace CSPCoffee
     using System;
     using System.Collections.Generic;
     
-    public partial class Products
+    public partial class Members
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Products()
+        public Members()
         {
-            this.PhotoDetails = new HashSet<PhotoDetails>();
             this.Comment = new HashSet<Comment>();
+            this.CouponDetail = new HashSet<CouponDetail>();
             this.MyLike = new HashSet<MyLike>();
-            this.OrderDetails = new HashSet<OrderDetails>();
-            this.ShoppingCarDetail = new HashSet<ShoppingCarDetail>();
+            this.Orders = new HashSet<Orders>();
+            this.Qquestionnaire = new HashSet<Qquestionnaire>();
         }
     
-        public int ProductID { get; set; }
-        public string ProductName { get; set; }
-        public int CategoryID { get; set; }
-        public Nullable<int> CountryID { get; set; }
-        public Nullable<double> Price { get; set; }
-        public string Description { get; set; }
-        public Nullable<int> Stock { get; set; }
-        public Nullable<int> ClickCount { get; set; }
-        public bool TakeDown { get; set; }
-        public Nullable<double> Star { get; set; }
-        public Nullable<int> PhotoID { get; set; }
+        public string MemberPhone { get; set; }
+        public int MemberID { get; set; }
+        public int ShoppingCarID { get; set; }
+        public string MemberEMail { get; set; }
+        public string MemberPassword { get; set; }
+        public string MemberAddress { get; set; }
+        public string MemberName { get; set; }
+        public System.DateTime MemberBirthDay { get; set; }
+        public byte[] MemberPhoto { get; set; }
+        public Nullable<bool> BlackList { get; set; }
     
-        public virtual Categories Categories { get; set; }
-        public virtual Coffee Coffee { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PhotoDetails> PhotoDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Comment> Comment { get; set; }
-        public virtual Country Country { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CouponDetail> CouponDetail { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MyLike> MyLike { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderDetails> OrderDetails { get; set; }
+        public virtual ICollection<Orders> Orders { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ShoppingCarDetail> ShoppingCarDetail { get; set; }
+        public virtual ICollection<Qquestionnaire> Qquestionnaire { get; set; }
+        public virtual ShoppingCar ShoppingCar { get; set; }
     }
 }

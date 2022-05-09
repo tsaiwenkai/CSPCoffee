@@ -4,7 +4,15 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="CoffeeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="CoffeeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="AdminID" />
+          </Key>
+          <Property Name="AdminID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AdminName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="AdminPassword" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="Categories">
           <Key>
             <PropertyRef Name="CategoryID" />
@@ -26,6 +34,140 @@
           <Property Name="ConstellationID" Type="int" />
           <Property Name="RainForest" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="Comment">
+          <Key>
+            <PropertyRef Name="CommentID" />
+          </Key>
+          <Property Name="CommentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderID" Type="int" Nullable="false" />
+          <Property Name="ProductID" Type="int" Nullable="false" />
+          <Property Name="MemberID" Type="int" Nullable="false" />
+          <Property Name="CommentParentID" Type="int" />
+          <Property Name="CommentDescription" Type="nvarchar" MaxLength="50" />
+          <Property Name="Star" Type="float" />
+        </EntityType>
+        <EntityType Name="Constellation">
+          <Key>
+            <PropertyRef Name="ConstellationID" />
+          </Key>
+          <Property Name="ConstellationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ConstellationName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ConstellationDescription" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Continent">
+          <Key>
+            <PropertyRef Name="ContinentID" />
+          </Key>
+          <Property Name="ContinentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ContinentName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="CountryID" />
+          </Key>
+          <Property Name="CountryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CountryName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ContinentID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Coupon">
+          <Key>
+            <PropertyRef Name="CouponID" />
+          </Key>
+          <Property Name="CouponID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CouponName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Money" Type="int" Nullable="false" />
+          <Property Name="Condition" Type="int" Nullable="false" />
+          <Property Name="CouponStartDate" Type="date" Nullable="false" />
+          <Property Name="CouponDeadline" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CouponDetail">
+          <Key>
+            <PropertyRef Name="CouponDetailsID" />
+          </Key>
+          <Property Name="CouponDetailsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MemberID" Type="int" Nullable="false" />
+          <Property Name="CouponID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="IntroducePhotos">
+          <Key>
+            <PropertyRef Name="IntroducePhotosID" />
+          </Key>
+          <Property Name="IntroducePhotosID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IntroduceID" Type="int" Nullable="false" />
+          <Property Name="IntroducePhoto" Type="image" />
+        </EntityType>
+        <EntityType Name="Introduces">
+          <Key>
+            <PropertyRef Name="IntroducesID" />
+          </Key>
+          <Property Name="IntroducesID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Members">
+          <Key>
+            <PropertyRef Name="MemberID" />
+          </Key>
+          <Property Name="MemberPhone" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MemberID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ShoppingCarID" Type="int" Nullable="false" />
+          <Property Name="MemberEMail" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MemberPassword" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MemberAddress" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MemberName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MemberBirthDay" Type="date" Nullable="false" />
+          <Property Name="MemberPhoto" Type="image" />
+          <Property Name="BlackList" Type="bit" />
+        </EntityType>
+        <EntityType Name="MyLike">
+          <Key>
+            <PropertyRef Name="LikeID" />
+          </Key>
+          <Property Name="LikeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MemberID" Type="int" Nullable="false" />
+          <Property Name="ProductID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrderDetails">
+          <Key>
+            <PropertyRef Name="OrderDetailsID" />
+          </Key>
+          <Property Name="OrderDetailsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderID" Type="int" Nullable="false" />
+          <Property Name="ProductID" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MemberID" Type="int" Nullable="false" />
+          <Property Name="OrderDate" Type="date" Nullable="false" />
+          <Property Name="OrderStateID" Type="int" Nullable="false" />
+          <Property Name="PaymentID" Type="int" Nullable="false" />
+          <Property Name="OrderAddress" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CouponID" Type="int" />
+        </EntityType>
+        <EntityType Name="OrderStates">
+          <Key>
+            <PropertyRef Name="OrderStateID" />
+          </Key>
+          <Property Name="OrderStateID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderState" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Package">
+          <Key>
+            <PropertyRef Name="PackageID" />
+          </Key>
+          <Property Name="PackageID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PackageName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Payments">
+          <Key>
+            <PropertyRef Name="PaymentID" />
+          </Key>
+          <Property Name="PaymentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Payment" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="PhotoDetails">
           <Key>
             <PropertyRef Name="PhotoDetailsID" />
@@ -40,6 +182,13 @@
           </Key>
           <Property Name="PhotoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Photo" Type="image" />
+        </EntityType>
+        <EntityType Name="Process">
+          <Key>
+            <PropertyRef Name="ProcessID" />
+          </Key>
+          <Property Name="ProcessID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProcessName" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Products">
           <Key>
@@ -57,6 +206,95 @@
           <Property Name="Star" Type="float" />
           <Property Name="PhotoID" Type="int" />
         </EntityType>
+        <EntityType Name="Qquestionnaire">
+          <Key>
+            <PropertyRef Name="QquestionnaireID" />
+          </Key>
+          <Property Name="QquestionnaireID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MemberID" Type="int" Nullable="false" />
+          <Property Name="CouponID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Roasting">
+          <Key>
+            <PropertyRef Name="RoastingID" />
+          </Key>
+          <Property Name="RoastingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoastingName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ShoppingCar">
+          <Key>
+            <PropertyRef Name="MemberID" />
+          </Key>
+          <Property Name="ShoppinCarID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MemberID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ShoppingCarDetail">
+          <Key>
+            <PropertyRef Name="ShoppingCarDetialsID" />
+          </Key>
+          <Property Name="ShoppingCarDetialsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MemberID" Type="int" Nullable="false" />
+          <Property Name="ProductsID" Type="int" />
+          <Property Name="Quantity" Type="int" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_Coffee_Constellation">
+          <End Role="Constellation" Type="Self.Constellation" Multiplicity="0..1" />
+          <End Role="Coffee" Type="Self.Coffee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Constellation">
+              <PropertyRef Name="ConstellationID" />
+            </Principal>
+            <Dependent Role="Coffee">
+              <PropertyRef Name="ConstellationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Coffee_Country">
+          <End Role="Country" Type="Self.Country" Multiplicity="1" />
+          <End Role="Coffee" Type="Self.Coffee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="CountryID" />
+            </Principal>
+            <Dependent Role="Coffee">
+              <PropertyRef Name="CountryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Coffee_Package">
+          <End Role="Package" Type="Self.Package" Multiplicity="1" />
+          <End Role="Coffee" Type="Self.Coffee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Package">
+              <PropertyRef Name="PackageID" />
+            </Principal>
+            <Dependent Role="Coffee">
+              <PropertyRef Name="PackageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Coffee_Process">
+          <End Role="Process" Type="Self.Process" Multiplicity="1" />
+          <End Role="Coffee" Type="Self.Coffee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Process">
+              <PropertyRef Name="ProcessID" />
+            </Principal>
+            <Dependent Role="Coffee">
+              <PropertyRef Name="ProcessID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Coffee_Products1">
           <End Role="Products" Type="Self.Products" Multiplicity="1" />
           <End Role="Coffee" Type="Self.Coffee" Multiplicity="0..1" />
@@ -66,6 +304,186 @@
             </Principal>
             <Dependent Role="Coffee">
               <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Coffee_Roasting1">
+          <End Role="Roasting" Type="Self.Roasting" Multiplicity="1" />
+          <End Role="Coffee" Type="Self.Coffee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roasting">
+              <PropertyRef Name="RoastingID" />
+            </Principal>
+            <Dependent Role="Coffee">
+              <PropertyRef Name="RoastingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comment_Members">
+          <End Role="Members" Type="Self.Members" Multiplicity="1" />
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="MemberID" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="MemberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comment_Orders">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comment_Products">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Country_Continent1">
+          <End Role="Continent" Type="Self.Continent" Multiplicity="1" />
+          <End Role="Country" Type="Self.Country" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Continent">
+              <PropertyRef Name="ContinentID" />
+            </Principal>
+            <Dependent Role="Country">
+              <PropertyRef Name="ContinentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CouponDetail_Coupon">
+          <End Role="Coupon" Type="Self.Coupon" Multiplicity="1" />
+          <End Role="CouponDetail" Type="Self.CouponDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Coupon">
+              <PropertyRef Name="CouponID" />
+            </Principal>
+            <Dependent Role="CouponDetail">
+              <PropertyRef Name="CouponID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CouponDetail_Members">
+          <End Role="Members" Type="Self.Members" Multiplicity="1" />
+          <End Role="CouponDetail" Type="Self.CouponDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="MemberID" />
+            </Principal>
+            <Dependent Role="CouponDetail">
+              <PropertyRef Name="MemberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IntroducePhotos_Introduces">
+          <End Role="Introduces" Type="Self.Introduces" Multiplicity="1" />
+          <End Role="IntroducePhotos" Type="Self.IntroducePhotos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Introduces">
+              <PropertyRef Name="IntroducesID" />
+            </Principal>
+            <Dependent Role="IntroducePhotos">
+              <PropertyRef Name="IntroduceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MyLike_Members">
+          <End Role="Members" Type="Self.Members" Multiplicity="1" />
+          <End Role="MyLike" Type="Self.MyLike" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="MemberID" />
+            </Principal>
+            <Dependent Role="MyLike">
+              <PropertyRef Name="MemberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MyLike_Products">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="MyLike" Type="Self.MyLike" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="MyLike">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetails_Orders1">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+          <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="OrderDetails">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetails_Products1">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="OrderDetails">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Members">
+          <End Role="Members" Type="Self.Members" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="MemberID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="MemberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_OrderStates">
+          <End Role="OrderStates" Type="Self.OrderStates" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderStates">
+              <PropertyRef Name="OrderStateID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="OrderStateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Payments">
+          <End Role="Payments" Type="Self.Payments" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Payments">
+              <PropertyRef Name="PaymentID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="PaymentID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -105,15 +523,185 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Products_Country">
+          <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="CountryID" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="CountryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Qquestionnaire_Coupon">
+          <End Role="Coupon" Type="Self.Coupon" Multiplicity="1" />
+          <End Role="Qquestionnaire" Type="Self.Qquestionnaire" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Coupon">
+              <PropertyRef Name="CouponID" />
+            </Principal>
+            <Dependent Role="Qquestionnaire">
+              <PropertyRef Name="CouponID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Qquestionnaire_Members">
+          <End Role="Members" Type="Self.Members" Multiplicity="1" />
+          <End Role="Qquestionnaire" Type="Self.Qquestionnaire" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="MemberID" />
+            </Principal>
+            <Dependent Role="Qquestionnaire">
+              <PropertyRef Name="MemberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ShoppingCar_Members">
+          <End Role="Members" Type="Self.Members" Multiplicity="1" />
+          <End Role="ShoppingCar" Type="Self.ShoppingCar" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="MemberID" />
+            </Principal>
+            <Dependent Role="ShoppingCar">
+              <PropertyRef Name="MemberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ShoppingCarDetail_Products">
+          <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+          <End Role="ShoppingCarDetail" Type="Self.ShoppingCarDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="ShoppingCarDetail">
+              <PropertyRef Name="ProductsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ShoppingCarDetail_ShoppingCar">
+          <End Role="ShoppingCar" Type="Self.ShoppingCar" Multiplicity="1" />
+          <End Role="ShoppingCarDetail" Type="Self.ShoppingCarDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShoppingCar">
+              <PropertyRef Name="MemberID" />
+            </Principal>
+            <Dependent Role="ShoppingCarDetail">
+              <PropertyRef Name="MemberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="CoffeeModelStoreContainer">
+          <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Coffee" EntityType="Self.Coffee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Constellation" EntityType="Self.Constellation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Continent" EntityType="Self.Continent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Coupon" EntityType="Self.Coupon" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CouponDetail" EntityType="Self.CouponDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="IntroducePhotos" EntityType="Self.IntroducePhotos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Introduces" EntityType="Self.Introduces" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Members" EntityType="Self.Members" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MyLike" EntityType="Self.MyLike" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderDetails" EntityType="Self.OrderDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderStates" EntityType="Self.OrderStates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Package" EntityType="Self.Package" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Payments" EntityType="Self.Payments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PhotoDetails" EntityType="Self.PhotoDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Photos" EntityType="Self.Photos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Process" EntityType="Self.Process" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Qquestionnaire" EntityType="Self.Qquestionnaire" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roasting" EntityType="Self.Roasting" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ShoppingCar" EntityType="Self.ShoppingCar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ShoppingCarDetail" EntityType="Self.ShoppingCarDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Coffee_Constellation" Association="Self.FK_Coffee_Constellation">
+            <End Role="Constellation" EntitySet="Constellation" />
+            <End Role="Coffee" EntitySet="Coffee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Coffee_Country" Association="Self.FK_Coffee_Country">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="Coffee" EntitySet="Coffee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Coffee_Package" Association="Self.FK_Coffee_Package">
+            <End Role="Package" EntitySet="Package" />
+            <End Role="Coffee" EntitySet="Coffee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Coffee_Process" Association="Self.FK_Coffee_Process">
+            <End Role="Process" EntitySet="Process" />
+            <End Role="Coffee" EntitySet="Coffee" />
+          </AssociationSet>
           <AssociationSet Name="FK_Coffee_Products1" Association="Self.FK_Coffee_Products1">
             <End Role="Products" EntitySet="Products" />
             <End Role="Coffee" EntitySet="Coffee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Coffee_Roasting1" Association="Self.FK_Coffee_Roasting1">
+            <End Role="Roasting" EntitySet="Roasting" />
+            <End Role="Coffee" EntitySet="Coffee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comment_Members" Association="Self.FK_Comment_Members">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="Comment" EntitySet="Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comment_Orders" Association="Self.FK_Comment_Orders">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="Comment" EntitySet="Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comment_Products" Association="Self.FK_Comment_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Comment" EntitySet="Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Country_Continent1" Association="Self.FK_Country_Continent1">
+            <End Role="Continent" EntitySet="Continent" />
+            <End Role="Country" EntitySet="Country" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CouponDetail_Coupon" Association="Self.FK_CouponDetail_Coupon">
+            <End Role="Coupon" EntitySet="Coupon" />
+            <End Role="CouponDetail" EntitySet="CouponDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CouponDetail_Members" Association="Self.FK_CouponDetail_Members">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="CouponDetail" EntitySet="CouponDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IntroducePhotos_Introduces" Association="Self.FK_IntroducePhotos_Introduces">
+            <End Role="Introduces" EntitySet="Introduces" />
+            <End Role="IntroducePhotos" EntitySet="IntroducePhotos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MyLike_Members" Association="Self.FK_MyLike_Members">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="MyLike" EntitySet="MyLike" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MyLike_Products" Association="Self.FK_MyLike_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="MyLike" EntitySet="MyLike" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetails_Orders1" Association="Self.FK_OrderDetails_Orders1">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetails_Products1" Association="Self.FK_OrderDetails_Products1">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Members" Association="Self.FK_Orders_Members">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_OrderStates" Association="Self.FK_Orders_OrderStates">
+            <End Role="OrderStates" EntitySet="OrderStates" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Payments" Association="Self.FK_Orders_Payments">
+            <End Role="Payments" EntitySet="Payments" />
+            <End Role="Orders" EntitySet="Orders" />
           </AssociationSet>
           <AssociationSet Name="FK_PhotoDetails_Photos" Association="Self.FK_PhotoDetails_Photos">
             <End Role="Photos" EntitySet="Photos" />
@@ -127,9 +715,32 @@
             <End Role="Categories" EntitySet="Categories" />
             <End Role="Products" EntitySet="Products" />
           </AssociationSet>
+          <AssociationSet Name="FK_Products_Country" Association="Self.FK_Products_Country">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Qquestionnaire_Coupon" Association="Self.FK_Qquestionnaire_Coupon">
+            <End Role="Coupon" EntitySet="Coupon" />
+            <End Role="Qquestionnaire" EntitySet="Qquestionnaire" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Qquestionnaire_Members" Association="Self.FK_Qquestionnaire_Members">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="Qquestionnaire" EntitySet="Qquestionnaire" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShoppingCar_Members" Association="Self.FK_ShoppingCar_Members">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="ShoppingCar" EntitySet="ShoppingCar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShoppingCarDetail_Products" Association="Self.FK_ShoppingCarDetail_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="ShoppingCarDetail" EntitySet="ShoppingCarDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShoppingCarDetail_ShoppingCar" Association="Self.FK_ShoppingCarDetail_ShoppingCar">
+            <End Role="ShoppingCar" EntitySet="ShoppingCar" />
+            <End Role="ShoppingCarDetail" EntitySet="ShoppingCarDetail" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CoffeeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -155,6 +766,11 @@
           <Property Name="ConstellationID" Type="Int32" />
           <Property Name="RainForest" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Products" Relationship="Self.FK_Coffee_Products1" FromRole="Coffee" ToRole="Products" />
+          <NavigationProperty Name="Constellation" Relationship="CoffeeModel.FK_Coffee_Constellation" FromRole="Coffee" ToRole="Constellation" />
+          <NavigationProperty Name="Country" Relationship="CoffeeModel.FK_Coffee_Country" FromRole="Coffee" ToRole="Country" />
+          <NavigationProperty Name="Package" Relationship="CoffeeModel.FK_Coffee_Package" FromRole="Coffee" ToRole="Package" />
+          <NavigationProperty Name="Process" Relationship="CoffeeModel.FK_Coffee_Process" FromRole="Coffee" ToRole="Process" />
+          <NavigationProperty Name="Roasting" Relationship="CoffeeModel.FK_Coffee_Roasting1" FromRole="Coffee" ToRole="Roasting" />
         </EntityType>
         <EntityType Name="PhotoDetails">
           <Key>
@@ -192,6 +808,11 @@
           <NavigationProperty Name="Categories" Relationship="Self.FK_Products_Categories" FromRole="Products" ToRole="Categories" />
           <NavigationProperty Name="Coffee" Relationship="Self.FK_Coffee_Products1" FromRole="Products" ToRole="Coffee" />
           <NavigationProperty Name="PhotoDetails" Relationship="Self.FK_PhotoDetails_Products" FromRole="Products" ToRole="PhotoDetails" />
+          <NavigationProperty Name="Comment" Relationship="CoffeeModel.FK_Comment_Products" FromRole="Products" ToRole="Comment" />
+          <NavigationProperty Name="Country" Relationship="CoffeeModel.FK_Products_Country" FromRole="Products" ToRole="Country" />
+          <NavigationProperty Name="MyLike" Relationship="CoffeeModel.FK_MyLike_Products" FromRole="Products" ToRole="MyLike" />
+          <NavigationProperty Name="OrderDetails" Relationship="CoffeeModel.FK_OrderDetails_Products1" FromRole="Products" ToRole="OrderDetails" />
+          <NavigationProperty Name="ShoppingCarDetail" Relationship="CoffeeModel.FK_ShoppingCarDetail_Products" FromRole="Products" ToRole="ShoppingCarDetail" />
         </EntityType>
         <Association Name="FK_Products_Categories">
           <End Role="Categories" Type="Self.Categories" Multiplicity="1" />
@@ -263,7 +884,659 @@
             <End Role="Products" EntitySet="Products" />
             <End Role="PhotoDetails" EntitySet="PhotoDetails" />
           </AssociationSet>
+          <EntitySet Name="Admin" EntityType="CoffeeModel.Admin" />
+          <EntitySet Name="Comment" EntityType="CoffeeModel.Comment" />
+          <EntitySet Name="Constellation" EntityType="CoffeeModel.Constellation" />
+          <EntitySet Name="Continent" EntityType="CoffeeModel.Continent" />
+          <EntitySet Name="Country" EntityType="CoffeeModel.Country" />
+          <EntitySet Name="Coupon" EntityType="CoffeeModel.Coupon" />
+          <EntitySet Name="CouponDetail" EntityType="CoffeeModel.CouponDetail" />
+          <EntitySet Name="IntroducePhotos" EntityType="CoffeeModel.IntroducePhotos" />
+          <EntitySet Name="Introduces" EntityType="CoffeeModel.Introduces" />
+          <EntitySet Name="Members" EntityType="CoffeeModel.Members" />
+          <EntitySet Name="MyLike" EntityType="CoffeeModel.MyLike" />
+          <EntitySet Name="OrderDetails" EntityType="CoffeeModel.OrderDetails" />
+          <EntitySet Name="Orders" EntityType="CoffeeModel.Orders" />
+          <EntitySet Name="OrderStates" EntityType="CoffeeModel.OrderStates" />
+          <EntitySet Name="Package" EntityType="CoffeeModel.Package" />
+          <EntitySet Name="Payments" EntityType="CoffeeModel.Payments" />
+          <EntitySet Name="Process" EntityType="CoffeeModel.Process" />
+          <EntitySet Name="Qquestionnaire" EntityType="CoffeeModel.Qquestionnaire" />
+          <EntitySet Name="Roasting" EntityType="CoffeeModel.Roasting" />
+          <EntitySet Name="ShoppingCar" EntityType="CoffeeModel.ShoppingCar" />
+          <EntitySet Name="ShoppingCarDetail" EntityType="CoffeeModel.ShoppingCarDetail" />
+          <EntitySet Name="sysdiagrams" EntityType="CoffeeModel.sysdiagrams" />
+          <AssociationSet Name="FK_Coffee_Constellation" Association="CoffeeModel.FK_Coffee_Constellation">
+            <End Role="Constellation" EntitySet="Constellation" />
+            <End Role="Coffee" EntitySet="Coffee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Coffee_Country" Association="CoffeeModel.FK_Coffee_Country">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="Coffee" EntitySet="Coffee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Coffee_Package" Association="CoffeeModel.FK_Coffee_Package">
+            <End Role="Package" EntitySet="Package" />
+            <End Role="Coffee" EntitySet="Coffee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Coffee_Process" Association="CoffeeModel.FK_Coffee_Process">
+            <End Role="Process" EntitySet="Process" />
+            <End Role="Coffee" EntitySet="Coffee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Coffee_Roasting1" Association="CoffeeModel.FK_Coffee_Roasting1">
+            <End Role="Roasting" EntitySet="Roasting" />
+            <End Role="Coffee" EntitySet="Coffee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comment_Members" Association="CoffeeModel.FK_Comment_Members">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="Comment" EntitySet="Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comment_Orders" Association="CoffeeModel.FK_Comment_Orders">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="Comment" EntitySet="Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comment_Products" Association="CoffeeModel.FK_Comment_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Comment" EntitySet="Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Country_Continent1" Association="CoffeeModel.FK_Country_Continent1">
+            <End Role="Continent" EntitySet="Continent" />
+            <End Role="Country" EntitySet="Country" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_Country" Association="CoffeeModel.FK_Products_Country">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CouponDetail_Coupon" Association="CoffeeModel.FK_CouponDetail_Coupon">
+            <End Role="Coupon" EntitySet="Coupon" />
+            <End Role="CouponDetail" EntitySet="CouponDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Qquestionnaire_Coupon" Association="CoffeeModel.FK_Qquestionnaire_Coupon">
+            <End Role="Coupon" EntitySet="Coupon" />
+            <End Role="Qquestionnaire" EntitySet="Qquestionnaire" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CouponDetail_Members" Association="CoffeeModel.FK_CouponDetail_Members">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="CouponDetail" EntitySet="CouponDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IntroducePhotos_Introduces" Association="CoffeeModel.FK_IntroducePhotos_Introduces">
+            <End Role="Introduces" EntitySet="Introduces" />
+            <End Role="IntroducePhotos" EntitySet="IntroducePhotos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MyLike_Members" Association="CoffeeModel.FK_MyLike_Members">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="MyLike" EntitySet="MyLike" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Members" Association="CoffeeModel.FK_Orders_Members">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Qquestionnaire_Members" Association="CoffeeModel.FK_Qquestionnaire_Members">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="Qquestionnaire" EntitySet="Qquestionnaire" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShoppingCar_Members" Association="CoffeeModel.FK_ShoppingCar_Members">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="ShoppingCar" EntitySet="ShoppingCar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MyLike_Products" Association="CoffeeModel.FK_MyLike_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="MyLike" EntitySet="MyLike" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetails_Orders1" Association="CoffeeModel.FK_OrderDetails_Orders1">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetails_Products1" Association="CoffeeModel.FK_OrderDetails_Products1">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_OrderStates" Association="CoffeeModel.FK_Orders_OrderStates">
+            <End Role="OrderStates" EntitySet="OrderStates" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Payments" Association="CoffeeModel.FK_Orders_Payments">
+            <End Role="Payments" EntitySet="Payments" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShoppingCarDetail_Products" Association="CoffeeModel.FK_ShoppingCarDetail_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="ShoppingCarDetail" EntitySet="ShoppingCarDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShoppingCarDetail_ShoppingCar" Association="CoffeeModel.FK_ShoppingCarDetail_ShoppingCar">
+            <End Role="ShoppingCar" EntitySet="ShoppingCar" />
+            <End Role="ShoppingCarDetail" EntitySet="ShoppingCarDetail" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="AdminID" />
+          </Key>
+          <Property Name="AdminID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AdminName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AdminPassword" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Comment">
+          <Key>
+            <PropertyRef Name="CommentID" />
+          </Key>
+          <Property Name="CommentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderID" Type="Int32" Nullable="false" />
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <Property Name="MemberID" Type="Int32" Nullable="false" />
+          <Property Name="CommentParentID" Type="Int32" />
+          <Property Name="CommentDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Star" Type="Double" />
+          <NavigationProperty Name="Members" Relationship="CoffeeModel.FK_Comment_Members" FromRole="Comment" ToRole="Members" />
+          <NavigationProperty Name="Orders" Relationship="CoffeeModel.FK_Comment_Orders" FromRole="Comment" ToRole="Orders" />
+          <NavigationProperty Name="Products" Relationship="CoffeeModel.FK_Comment_Products" FromRole="Comment" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="Constellation">
+          <Key>
+            <PropertyRef Name="ConstellationID" />
+          </Key>
+          <Property Name="ConstellationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ConstellationName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ConstellationDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Coffee" Relationship="CoffeeModel.FK_Coffee_Constellation" FromRole="Constellation" ToRole="Coffee" />
+        </EntityType>
+        <EntityType Name="Continent">
+          <Key>
+            <PropertyRef Name="ContinentID" />
+          </Key>
+          <Property Name="ContinentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ContinentName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Country" Relationship="CoffeeModel.FK_Country_Continent1" FromRole="Continent" ToRole="Country" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="CountryID" />
+          </Key>
+          <Property Name="CountryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CountryName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ContinentID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Coffee" Relationship="CoffeeModel.FK_Coffee_Country" FromRole="Country" ToRole="Coffee" />
+          <NavigationProperty Name="Continent" Relationship="CoffeeModel.FK_Country_Continent1" FromRole="Country" ToRole="Continent" />
+          <NavigationProperty Name="Products" Relationship="CoffeeModel.FK_Products_Country" FromRole="Country" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="Coupon">
+          <Key>
+            <PropertyRef Name="CouponID" />
+          </Key>
+          <Property Name="CouponID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CouponName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Money" Type="Int32" Nullable="false" />
+          <Property Name="Condition" Type="Int32" Nullable="false" />
+          <Property Name="CouponStartDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CouponDeadline" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="CouponDetail" Relationship="CoffeeModel.FK_CouponDetail_Coupon" FromRole="Coupon" ToRole="CouponDetail" />
+          <NavigationProperty Name="Qquestionnaire" Relationship="CoffeeModel.FK_Qquestionnaire_Coupon" FromRole="Coupon" ToRole="Qquestionnaire" />
+        </EntityType>
+        <EntityType Name="CouponDetail">
+          <Key>
+            <PropertyRef Name="CouponDetailsID" />
+          </Key>
+          <Property Name="CouponDetailsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MemberID" Type="Int32" Nullable="false" />
+          <Property Name="CouponID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Coupon" Relationship="CoffeeModel.FK_CouponDetail_Coupon" FromRole="CouponDetail" ToRole="Coupon" />
+          <NavigationProperty Name="Members" Relationship="CoffeeModel.FK_CouponDetail_Members" FromRole="CouponDetail" ToRole="Members" />
+        </EntityType>
+        <EntityType Name="IntroducePhotos">
+          <Key>
+            <PropertyRef Name="IntroducePhotosID" />
+          </Key>
+          <Property Name="IntroducePhotosID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IntroduceID" Type="Int32" Nullable="false" />
+          <Property Name="IntroducePhoto" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Introduces" Relationship="CoffeeModel.FK_IntroducePhotos_Introduces" FromRole="IntroducePhotos" ToRole="Introduces" />
+        </EntityType>
+        <EntityType Name="Introduces">
+          <Key>
+            <PropertyRef Name="IntroducesID" />
+          </Key>
+          <Property Name="IntroducesID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="IntroducePhotos" Relationship="CoffeeModel.FK_IntroducePhotos_Introduces" FromRole="Introduces" ToRole="IntroducePhotos" />
+        </EntityType>
+        <EntityType Name="Members">
+          <Key>
+            <PropertyRef Name="MemberID" />
+          </Key>
+          <Property Name="MemberPhone" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MemberID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ShoppingCarID" Type="Int32" Nullable="false" />
+          <Property Name="MemberEMail" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MemberPassword" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MemberAddress" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MemberName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MemberBirthDay" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="MemberPhoto" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="BlackList" Type="Boolean" />
+          <NavigationProperty Name="Comment" Relationship="CoffeeModel.FK_Comment_Members" FromRole="Members" ToRole="Comment" />
+          <NavigationProperty Name="CouponDetail" Relationship="CoffeeModel.FK_CouponDetail_Members" FromRole="Members" ToRole="CouponDetail" />
+          <NavigationProperty Name="MyLike" Relationship="CoffeeModel.FK_MyLike_Members" FromRole="Members" ToRole="MyLike" />
+          <NavigationProperty Name="Orders" Relationship="CoffeeModel.FK_Orders_Members" FromRole="Members" ToRole="Orders" />
+          <NavigationProperty Name="Qquestionnaire" Relationship="CoffeeModel.FK_Qquestionnaire_Members" FromRole="Members" ToRole="Qquestionnaire" />
+          <NavigationProperty Name="ShoppingCar" Relationship="CoffeeModel.FK_ShoppingCar_Members" FromRole="Members" ToRole="ShoppingCar" />
+        </EntityType>
+        <EntityType Name="MyLike">
+          <Key>
+            <PropertyRef Name="LikeID" />
+          </Key>
+          <Property Name="LikeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MemberID" Type="Int32" Nullable="false" />
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Members" Relationship="CoffeeModel.FK_MyLike_Members" FromRole="MyLike" ToRole="Members" />
+          <NavigationProperty Name="Products" Relationship="CoffeeModel.FK_MyLike_Products" FromRole="MyLike" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="OrderDetails">
+          <Key>
+            <PropertyRef Name="OrderDetailsID" />
+          </Key>
+          <Property Name="OrderDetailsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderID" Type="Int32" Nullable="false" />
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Orders" Relationship="CoffeeModel.FK_OrderDetails_Orders1" FromRole="OrderDetails" ToRole="Orders" />
+          <NavigationProperty Name="Products" Relationship="CoffeeModel.FK_OrderDetails_Products1" FromRole="OrderDetails" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MemberID" Type="Int32" Nullable="false" />
+          <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="OrderStateID" Type="Int32" Nullable="false" />
+          <Property Name="PaymentID" Type="Int32" Nullable="false" />
+          <Property Name="OrderAddress" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CouponID" Type="Int32" />
+          <NavigationProperty Name="Comment" Relationship="CoffeeModel.FK_Comment_Orders" FromRole="Orders" ToRole="Comment" />
+          <NavigationProperty Name="Members" Relationship="CoffeeModel.FK_Orders_Members" FromRole="Orders" ToRole="Members" />
+          <NavigationProperty Name="OrderDetails" Relationship="CoffeeModel.FK_OrderDetails_Orders1" FromRole="Orders" ToRole="OrderDetails" />
+          <NavigationProperty Name="OrderStates" Relationship="CoffeeModel.FK_Orders_OrderStates" FromRole="Orders" ToRole="OrderStates" />
+          <NavigationProperty Name="Payments" Relationship="CoffeeModel.FK_Orders_Payments" FromRole="Orders" ToRole="Payments" />
+        </EntityType>
+        <EntityType Name="OrderStates">
+          <Key>
+            <PropertyRef Name="OrderStateID" />
+          </Key>
+          <Property Name="OrderStateID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderState" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Orders" Relationship="CoffeeModel.FK_Orders_OrderStates" FromRole="OrderStates" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="Package">
+          <Key>
+            <PropertyRef Name="PackageID" />
+          </Key>
+          <Property Name="PackageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PackageName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Coffee" Relationship="CoffeeModel.FK_Coffee_Package" FromRole="Package" ToRole="Coffee" />
+        </EntityType>
+        <EntityType Name="Payments">
+          <Key>
+            <PropertyRef Name="PaymentID" />
+          </Key>
+          <Property Name="PaymentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Payment" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Orders" Relationship="CoffeeModel.FK_Orders_Payments" FromRole="Payments" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="Process">
+          <Key>
+            <PropertyRef Name="ProcessID" />
+          </Key>
+          <Property Name="ProcessID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProcessName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Coffee" Relationship="CoffeeModel.FK_Coffee_Process" FromRole="Process" ToRole="Coffee" />
+        </EntityType>
+        <EntityType Name="Qquestionnaire">
+          <Key>
+            <PropertyRef Name="QquestionnaireID" />
+          </Key>
+          <Property Name="QquestionnaireID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MemberID" Type="Int32" Nullable="false" />
+          <Property Name="CouponID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Coupon" Relationship="CoffeeModel.FK_Qquestionnaire_Coupon" FromRole="Qquestionnaire" ToRole="Coupon" />
+          <NavigationProperty Name="Members" Relationship="CoffeeModel.FK_Qquestionnaire_Members" FromRole="Qquestionnaire" ToRole="Members" />
+        </EntityType>
+        <EntityType Name="Roasting">
+          <Key>
+            <PropertyRef Name="RoastingID" />
+          </Key>
+          <Property Name="RoastingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoastingName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Coffee" Relationship="CoffeeModel.FK_Coffee_Roasting1" FromRole="Roasting" ToRole="Coffee" />
+        </EntityType>
+        <EntityType Name="ShoppingCar">
+          <Key>
+            <PropertyRef Name="MemberID" />
+          </Key>
+          <Property Name="ShoppinCarID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MemberID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Members" Relationship="CoffeeModel.FK_ShoppingCar_Members" FromRole="ShoppingCar" ToRole="Members" />
+          <NavigationProperty Name="ShoppingCarDetail" Relationship="CoffeeModel.FK_ShoppingCarDetail_ShoppingCar" FromRole="ShoppingCar" ToRole="ShoppingCarDetail" />
+        </EntityType>
+        <EntityType Name="ShoppingCarDetail">
+          <Key>
+            <PropertyRef Name="ShoppingCarDetialsID" />
+          </Key>
+          <Property Name="ShoppingCarDetialsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MemberID" Type="Int32" Nullable="false" />
+          <Property Name="ProductsID" Type="Int32" />
+          <Property Name="Quantity" Type="Int32" />
+          <NavigationProperty Name="Products" Relationship="CoffeeModel.FK_ShoppingCarDetail_Products" FromRole="ShoppingCarDetail" ToRole="Products" />
+          <NavigationProperty Name="ShoppingCar" Relationship="CoffeeModel.FK_ShoppingCarDetail_ShoppingCar" FromRole="ShoppingCarDetail" ToRole="ShoppingCar" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_Coffee_Constellation">
+          <End Type="CoffeeModel.Constellation" Role="Constellation" Multiplicity="0..1" />
+          <End Type="CoffeeModel.Coffee" Role="Coffee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Constellation">
+              <PropertyRef Name="ConstellationID" />
+            </Principal>
+            <Dependent Role="Coffee">
+              <PropertyRef Name="ConstellationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Coffee_Country">
+          <End Type="CoffeeModel.Country" Role="Country" Multiplicity="1" />
+          <End Type="CoffeeModel.Coffee" Role="Coffee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="CountryID" />
+            </Principal>
+            <Dependent Role="Coffee">
+              <PropertyRef Name="CountryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Coffee_Package">
+          <End Type="CoffeeModel.Package" Role="Package" Multiplicity="1" />
+          <End Type="CoffeeModel.Coffee" Role="Coffee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Package">
+              <PropertyRef Name="PackageID" />
+            </Principal>
+            <Dependent Role="Coffee">
+              <PropertyRef Name="PackageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Coffee_Process">
+          <End Type="CoffeeModel.Process" Role="Process" Multiplicity="1" />
+          <End Type="CoffeeModel.Coffee" Role="Coffee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Process">
+              <PropertyRef Name="ProcessID" />
+            </Principal>
+            <Dependent Role="Coffee">
+              <PropertyRef Name="ProcessID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Coffee_Roasting1">
+          <End Type="CoffeeModel.Roasting" Role="Roasting" Multiplicity="1" />
+          <End Type="CoffeeModel.Coffee" Role="Coffee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roasting">
+              <PropertyRef Name="RoastingID" />
+            </Principal>
+            <Dependent Role="Coffee">
+              <PropertyRef Name="RoastingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comment_Members">
+          <End Type="CoffeeModel.Members" Role="Members" Multiplicity="1" />
+          <End Type="CoffeeModel.Comment" Role="Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="MemberID" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="MemberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comment_Orders">
+          <End Type="CoffeeModel.Orders" Role="Orders" Multiplicity="1" />
+          <End Type="CoffeeModel.Comment" Role="Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comment_Products">
+          <End Type="CoffeeModel.Products" Role="Products" Multiplicity="1" />
+          <End Type="CoffeeModel.Comment" Role="Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Country_Continent1">
+          <End Type="CoffeeModel.Continent" Role="Continent" Multiplicity="1" />
+          <End Type="CoffeeModel.Country" Role="Country" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Continent">
+              <PropertyRef Name="ContinentID" />
+            </Principal>
+            <Dependent Role="Country">
+              <PropertyRef Name="ContinentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_Country">
+          <End Type="CoffeeModel.Country" Role="Country" Multiplicity="0..1" />
+          <End Type="CoffeeModel.Products" Role="Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="CountryID" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="CountryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CouponDetail_Coupon">
+          <End Type="CoffeeModel.Coupon" Role="Coupon" Multiplicity="1" />
+          <End Type="CoffeeModel.CouponDetail" Role="CouponDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Coupon">
+              <PropertyRef Name="CouponID" />
+            </Principal>
+            <Dependent Role="CouponDetail">
+              <PropertyRef Name="CouponID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Qquestionnaire_Coupon">
+          <End Type="CoffeeModel.Coupon" Role="Coupon" Multiplicity="1" />
+          <End Type="CoffeeModel.Qquestionnaire" Role="Qquestionnaire" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Coupon">
+              <PropertyRef Name="CouponID" />
+            </Principal>
+            <Dependent Role="Qquestionnaire">
+              <PropertyRef Name="CouponID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CouponDetail_Members">
+          <End Type="CoffeeModel.Members" Role="Members" Multiplicity="1" />
+          <End Type="CoffeeModel.CouponDetail" Role="CouponDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="MemberID" />
+            </Principal>
+            <Dependent Role="CouponDetail">
+              <PropertyRef Name="MemberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IntroducePhotos_Introduces">
+          <End Type="CoffeeModel.Introduces" Role="Introduces" Multiplicity="1" />
+          <End Type="CoffeeModel.IntroducePhotos" Role="IntroducePhotos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Introduces">
+              <PropertyRef Name="IntroducesID" />
+            </Principal>
+            <Dependent Role="IntroducePhotos">
+              <PropertyRef Name="IntroduceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MyLike_Members">
+          <End Type="CoffeeModel.Members" Role="Members" Multiplicity="1" />
+          <End Type="CoffeeModel.MyLike" Role="MyLike" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="MemberID" />
+            </Principal>
+            <Dependent Role="MyLike">
+              <PropertyRef Name="MemberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Members">
+          <End Type="CoffeeModel.Members" Role="Members" Multiplicity="1" />
+          <End Type="CoffeeModel.Orders" Role="Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="MemberID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="MemberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Qquestionnaire_Members">
+          <End Type="CoffeeModel.Members" Role="Members" Multiplicity="1" />
+          <End Type="CoffeeModel.Qquestionnaire" Role="Qquestionnaire" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="MemberID" />
+            </Principal>
+            <Dependent Role="Qquestionnaire">
+              <PropertyRef Name="MemberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ShoppingCar_Members">
+          <End Type="CoffeeModel.Members" Role="Members" Multiplicity="1" />
+          <End Type="CoffeeModel.ShoppingCar" Role="ShoppingCar" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="MemberID" />
+            </Principal>
+            <Dependent Role="ShoppingCar">
+              <PropertyRef Name="MemberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MyLike_Products">
+          <End Type="CoffeeModel.Products" Role="Products" Multiplicity="1" />
+          <End Type="CoffeeModel.MyLike" Role="MyLike" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="MyLike">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetails_Orders1">
+          <End Type="CoffeeModel.Orders" Role="Orders" Multiplicity="1" />
+          <End Type="CoffeeModel.OrderDetails" Role="OrderDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="OrderDetails">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetails_Products1">
+          <End Type="CoffeeModel.Products" Role="Products" Multiplicity="1" />
+          <End Type="CoffeeModel.OrderDetails" Role="OrderDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="OrderDetails">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_OrderStates">
+          <End Type="CoffeeModel.OrderStates" Role="OrderStates" Multiplicity="1" />
+          <End Type="CoffeeModel.Orders" Role="Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderStates">
+              <PropertyRef Name="OrderStateID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="OrderStateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Payments">
+          <End Type="CoffeeModel.Payments" Role="Payments" Multiplicity="1" />
+          <End Type="CoffeeModel.Orders" Role="Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Payments">
+              <PropertyRef Name="PaymentID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="PaymentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ShoppingCarDetail_Products">
+          <End Type="CoffeeModel.Products" Role="Products" Multiplicity="0..1" />
+          <End Type="CoffeeModel.ShoppingCarDetail" Role="ShoppingCarDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="ShoppingCarDetail">
+              <PropertyRef Name="ProductsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ShoppingCarDetail_ShoppingCar">
+          <End Type="CoffeeModel.ShoppingCar" Role="ShoppingCar" Multiplicity="1" />
+          <End Type="CoffeeModel.ShoppingCarDetail" Role="ShoppingCarDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShoppingCar">
+              <PropertyRef Name="MemberID" />
+            </Principal>
+            <Dependent Role="ShoppingCarDetail">
+              <PropertyRef Name="MemberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -324,6 +1597,218 @@
                 <ScalarProperty Name="TakeDown" ColumnName="TakeDown" />
                 <ScalarProperty Name="Star" ColumnName="Star" />
                 <ScalarProperty Name="PhotoID" ColumnName="PhotoID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Admin">
+            <EntityTypeMapping TypeName="CoffeeModel.Admin">
+              <MappingFragment StoreEntitySet="Admin">
+                <ScalarProperty Name="AdminPassword" ColumnName="AdminPassword" />
+                <ScalarProperty Name="AdminName" ColumnName="AdminName" />
+                <ScalarProperty Name="AdminID" ColumnName="AdminID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Comment">
+            <EntityTypeMapping TypeName="CoffeeModel.Comment">
+              <MappingFragment StoreEntitySet="Comment">
+                <ScalarProperty Name="Star" ColumnName="Star" />
+                <ScalarProperty Name="CommentDescription" ColumnName="CommentDescription" />
+                <ScalarProperty Name="CommentParentID" ColumnName="CommentParentID" />
+                <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="CommentID" ColumnName="CommentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Constellation">
+            <EntityTypeMapping TypeName="CoffeeModel.Constellation">
+              <MappingFragment StoreEntitySet="Constellation">
+                <ScalarProperty Name="ConstellationDescription" ColumnName="ConstellationDescription" />
+                <ScalarProperty Name="ConstellationName" ColumnName="ConstellationName" />
+                <ScalarProperty Name="ConstellationID" ColumnName="ConstellationID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Continent">
+            <EntityTypeMapping TypeName="CoffeeModel.Continent">
+              <MappingFragment StoreEntitySet="Continent">
+                <ScalarProperty Name="ContinentName" ColumnName="ContinentName" />
+                <ScalarProperty Name="ContinentID" ColumnName="ContinentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Country">
+            <EntityTypeMapping TypeName="CoffeeModel.Country">
+              <MappingFragment StoreEntitySet="Country">
+                <ScalarProperty Name="ContinentID" ColumnName="ContinentID" />
+                <ScalarProperty Name="CountryName" ColumnName="CountryName" />
+                <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Coupon">
+            <EntityTypeMapping TypeName="CoffeeModel.Coupon">
+              <MappingFragment StoreEntitySet="Coupon">
+                <ScalarProperty Name="CouponDeadline" ColumnName="CouponDeadline" />
+                <ScalarProperty Name="CouponStartDate" ColumnName="CouponStartDate" />
+                <ScalarProperty Name="Condition" ColumnName="Condition" />
+                <ScalarProperty Name="Money" ColumnName="Money" />
+                <ScalarProperty Name="CouponName" ColumnName="CouponName" />
+                <ScalarProperty Name="CouponID" ColumnName="CouponID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CouponDetail">
+            <EntityTypeMapping TypeName="CoffeeModel.CouponDetail">
+              <MappingFragment StoreEntitySet="CouponDetail">
+                <ScalarProperty Name="CouponID" ColumnName="CouponID" />
+                <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+                <ScalarProperty Name="CouponDetailsID" ColumnName="CouponDetailsID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IntroducePhotos">
+            <EntityTypeMapping TypeName="CoffeeModel.IntroducePhotos">
+              <MappingFragment StoreEntitySet="IntroducePhotos">
+                <ScalarProperty Name="IntroducePhoto" ColumnName="IntroducePhoto" />
+                <ScalarProperty Name="IntroduceID" ColumnName="IntroduceID" />
+                <ScalarProperty Name="IntroducePhotosID" ColumnName="IntroducePhotosID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Introduces">
+            <EntityTypeMapping TypeName="CoffeeModel.Introduces">
+              <MappingFragment StoreEntitySet="Introduces">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="IntroducesID" ColumnName="IntroducesID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Members">
+            <EntityTypeMapping TypeName="CoffeeModel.Members">
+              <MappingFragment StoreEntitySet="Members">
+                <ScalarProperty Name="BlackList" ColumnName="BlackList" />
+                <ScalarProperty Name="MemberPhoto" ColumnName="MemberPhoto" />
+                <ScalarProperty Name="MemberBirthDay" ColumnName="MemberBirthDay" />
+                <ScalarProperty Name="MemberName" ColumnName="MemberName" />
+                <ScalarProperty Name="MemberAddress" ColumnName="MemberAddress" />
+                <ScalarProperty Name="MemberPassword" ColumnName="MemberPassword" />
+                <ScalarProperty Name="MemberEMail" ColumnName="MemberEMail" />
+                <ScalarProperty Name="ShoppingCarID" ColumnName="ShoppingCarID" />
+                <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+                <ScalarProperty Name="MemberPhone" ColumnName="MemberPhone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MyLike">
+            <EntityTypeMapping TypeName="CoffeeModel.MyLike">
+              <MappingFragment StoreEntitySet="MyLike">
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+                <ScalarProperty Name="LikeID" ColumnName="LikeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderDetails">
+            <EntityTypeMapping TypeName="CoffeeModel.OrderDetails">
+              <MappingFragment StoreEntitySet="OrderDetails">
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="OrderDetailsID" ColumnName="OrderDetailsID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="CoffeeModel.Orders">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="CouponID" ColumnName="CouponID" />
+                <ScalarProperty Name="OrderAddress" ColumnName="OrderAddress" />
+                <ScalarProperty Name="PaymentID" ColumnName="PaymentID" />
+                <ScalarProperty Name="OrderStateID" ColumnName="OrderStateID" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderStates">
+            <EntityTypeMapping TypeName="CoffeeModel.OrderStates">
+              <MappingFragment StoreEntitySet="OrderStates">
+                <ScalarProperty Name="OrderState" ColumnName="OrderState" />
+                <ScalarProperty Name="OrderStateID" ColumnName="OrderStateID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Package">
+            <EntityTypeMapping TypeName="CoffeeModel.Package">
+              <MappingFragment StoreEntitySet="Package">
+                <ScalarProperty Name="PackageName" ColumnName="PackageName" />
+                <ScalarProperty Name="PackageID" ColumnName="PackageID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Payments">
+            <EntityTypeMapping TypeName="CoffeeModel.Payments">
+              <MappingFragment StoreEntitySet="Payments">
+                <ScalarProperty Name="Payment" ColumnName="Payment" />
+                <ScalarProperty Name="PaymentID" ColumnName="PaymentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Process">
+            <EntityTypeMapping TypeName="CoffeeModel.Process">
+              <MappingFragment StoreEntitySet="Process">
+                <ScalarProperty Name="ProcessName" ColumnName="ProcessName" />
+                <ScalarProperty Name="ProcessID" ColumnName="ProcessID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Qquestionnaire">
+            <EntityTypeMapping TypeName="CoffeeModel.Qquestionnaire">
+              <MappingFragment StoreEntitySet="Qquestionnaire">
+                <ScalarProperty Name="CouponID" ColumnName="CouponID" />
+                <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+                <ScalarProperty Name="QquestionnaireID" ColumnName="QquestionnaireID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roasting">
+            <EntityTypeMapping TypeName="CoffeeModel.Roasting">
+              <MappingFragment StoreEntitySet="Roasting">
+                <ScalarProperty Name="RoastingName" ColumnName="RoastingName" />
+                <ScalarProperty Name="RoastingID" ColumnName="RoastingID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ShoppingCar">
+            <EntityTypeMapping TypeName="CoffeeModel.ShoppingCar">
+              <MappingFragment StoreEntitySet="ShoppingCar">
+                <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+                <ScalarProperty Name="ShoppinCarID" ColumnName="ShoppinCarID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ShoppingCarDetail">
+            <EntityTypeMapping TypeName="CoffeeModel.ShoppingCarDetail">
+              <MappingFragment StoreEntitySet="ShoppingCarDetail">
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="ProductsID" ColumnName="ProductsID" />
+                <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+                <ScalarProperty Name="ShoppingCarDetialsID" ColumnName="ShoppingCarDetialsID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="CoffeeModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

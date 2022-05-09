@@ -55,6 +55,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin.cs">
+      <DependentUpon>Coffee.tt</DependentUpon>
+    </Compile>
     <Compile Include="Categories.cs">
       <DependentUpon>Coffee.tt</DependentUpon>
     </Compile>
@@ -79,6 +82,24 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Coffee.tt</DependentUpon>
     </Compile>
+    <Compile Include="Comment.cs">
+      <DependentUpon>Coffee.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Constellation.cs">
+      <DependentUpon>Coffee.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Continent.cs">
+      <DependentUpon>Coffee.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Country.cs">
+      <DependentUpon>Coffee.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Coupon.cs">
+      <DependentUpon>Coffee.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CouponDetail.cs">
+      <DependentUpon>Coffee.tt</DependentUpon>
+    </Compile>
     <Compile Include="Customer.cs">
       <DependentUpon>NWModel.tt</DependentUpon>
     </Compile>
@@ -90,6 +111,18 @@
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IntroducePhotos.cs">
+      <DependentUpon>Coffee.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Introduces.cs">
+      <DependentUpon>Coffee.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Members.cs">
+      <DependentUpon>Coffee.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MyLike.cs">
+      <DependentUpon>Coffee.tt</DependentUpon>
     </Compile>
     <Compile Include="NWModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -109,8 +142,23 @@
     <Compile Include="Order.cs">
       <DependentUpon>NWModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="OrderDetails.cs">
+      <DependentUpon>Coffee.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Orders.cs">
+      <DependentUpon>Coffee.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OrderStates.cs">
+      <DependentUpon>Coffee.tt</DependentUpon>
+    </Compile>
     <Compile Include="Order_Detail.cs">
       <DependentUpon>NWModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Package.cs">
+      <DependentUpon>Coffee.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Payments.cs">
+      <DependentUpon>Coffee.tt</DependentUpon>
     </Compile>
     <Compile Include="PDcontrol.cs">
       <SubType>UserControl</SubType>
@@ -122,6 +170,9 @@
       <DependentUpon>Coffee.tt</DependentUpon>
     </Compile>
     <Compile Include="Photos.cs">
+      <DependentUpon>Coffee.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Process.cs">
       <DependentUpon>Coffee.tt</DependentUpon>
     </Compile>
     <Compile Include="Product.cs">
@@ -138,6 +189,21 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Qquestionnaire.cs">
+      <DependentUpon>Coffee.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Roasting.cs">
+      <DependentUpon>Coffee.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShoppingCar.cs">
+      <DependentUpon>Coffee.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShoppingCarDetail.cs">
+      <DependentUpon>Coffee.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagrams.cs">
+      <DependentUpon>Coffee.tt</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

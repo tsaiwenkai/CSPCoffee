@@ -22,7 +22,7 @@ namespace CSPCoffee
         {
             InitializeComponent();
             MyInitializer();
-            dataGridView1.DataSource = db.PhotoDetails.AsEnumerable().Where(p => p.ProductID == 1).Select(p => new { p.ProductID, p.Photos.Photo }).ToList();
+            
         }
 
         CoffeeEntities1 db = new CoffeeEntities1();

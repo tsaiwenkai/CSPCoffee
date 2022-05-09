@@ -30,5 +30,27 @@ namespace CSPCoffee
         public virtual DbSet<PhotoDetails> PhotoDetails { get; set; }
         public virtual DbSet<Photos> Photos { get; set; }
         public virtual DbSet<Products> Products { get; set; }
+        public virtual DbSet<Admin> Admin { get; set; }
+        public virtual DbSet<Comment> Comment { get; set; }
+        public virtual DbSet<Constellation> Constellation { get; set; }
+        public virtual DbSet<Continent> Continent { get; set; }
+        public virtual DbSet<Country> Country { get; set; }
+        public virtual DbSet<Coupon> Coupon { get; set; }
+        public virtual DbSet<CouponDetail> CouponDetail { get; set; }
+        public virtual DbSet<IntroducePhotos> IntroducePhotos { get; set; }
+        public virtual DbSet<Introduces> Introduces { get; set; }
+        public virtual DbSet<Members> Members { get; set; }
+        public virtual DbSet<MyLike> MyLike { get; set; }
+        public virtual DbSet<OrderDetails> OrderDetails { get; set; }
+        public virtual DbSet<Orders> Orders { get; set; }
+        public virtual DbSet<OrderStates> OrderStates { get; set; }
+        public virtual DbSet<Package> Package { get; set; }
+        public virtual DbSet<Payments> Payments { get; set; }
+        public virtual DbSet<Process> Process { get; set; }
+        public virtual DbSet<Qquestionnaire> Qquestionnaire { get; set; }
+        public virtual DbSet<Roasting> Roasting { get; set; }
+        public virtual DbSet<ShoppingCar> ShoppingCar { get; set; }
+        public virtual DbSet<ShoppingCarDetail> ShoppingCarDetail { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
     }
 }
